@@ -86,7 +86,7 @@ public class JDomModelETL implements ModelETL {
 
     // rewrite DOM as a string to find differences, since text outside the root element is not tracked
     StringWriter w = new StringWriter();
-    printDocumentToWriter(document, w, modelETLRequest.getLineSeparator());
+    printDocumentToWriter(document, w, modelETLRequest.getLineSeparator(), modelETLRequest.getIndent());
 
     int index = content.indexOf(w.toString());
     if (index >= 0) {
@@ -233,7 +233,7 @@ public class JDomModelETL implements ModelETL {
         writer.write(intro);
       }
 
-      printDocumentToWriter(document, writer, modelETLRequest.getLineSeparator());
+      printDocumentToWriter(document, writer, modelETLRequest.getLineSeparator(), modelETLRequest.getIndent());
 
       if (outtro != null) {
         writer.write(outtro);
@@ -241,9 +241,10 @@ public class JDomModelETL implements ModelETL {
     }
   }
 
-  private static void printDocumentToWriter(Document document, Writer writer, String lineSeparator) throws IOException {
+  private static void printDocumentToWriter(Document document, Writer writer, String lineSeparator, String indent) throws IOException {
     Format format = Format.getRawFormat();
     format.setLineSeparator(lineSeparator);
+    format.setIndent(indent);
     XMLOutputter out = new XMLOutputter(format);
     out.output(document.getRootElement(), writer);
   }

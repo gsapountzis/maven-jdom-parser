@@ -41,6 +41,7 @@ public class ModelETLRequest {
 
   private boolean addSchema;
   private String lineSeparator = System.getProperty("line.separator");
+  private String indent = null;
 
   public boolean isAddSchema() {
     return addSchema;
@@ -56,5 +57,13 @@ public class ModelETLRequest {
 
   public void setLineSeparator(String lineSeparator) {
     this.lineSeparator = lineSeparator;
+  }
+
+  public String getIndent() {
+    return indent;
+  }
+
+  public void setIndent(String indent) {
+    this.indent = indent;
   }
 }
